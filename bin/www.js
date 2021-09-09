@@ -3,7 +3,7 @@
 /**
  * Module dependencies.
  */
-var app = require("../app");
+var app = require("../src");
 var debug = require("debug")("server");
 var http = require("http");
 const mongoose = require("mongoose");

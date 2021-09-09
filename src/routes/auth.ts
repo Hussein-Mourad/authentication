@@ -1,22 +1,25 @@
-const router = require("express").Router();
-const authController = require("../controllers/authController");
-const passport = require("passport");
+import {Router}from "express";
+import controller from "../controllers/auth";
+import passport from "passport";
+
+const router = Router();
+
 
 // @desc  Checks if a user is auth
 // @route POST /auth
-router.post("/", authController.check_auth_post);
+router.post("/", controller.check_auth_post);
 
 // @desc  Signup a user with email and password
 // @route POST /auth/signup
-router.post("/signup", authController.signup_post);
+router.post("/signup", controller.signup_post);
 
 // @desc  login a user
 // @route POST /auth/login
-router.post("/login", authController.login_post);
+router.post("/login", controller.login_post);
 
 // @desc    Logout user
 // @route   /auth/logout
-router.post("/logout", authController.logout_post);
+router.post("/logout", controller.logout_post);
 
 // @desc    Auth with Google
 // @route   GET /auth/google
@@ -83,5 +86,4 @@ router.get(
   })
 );
 
-
-module.exports = router;
+export default router;

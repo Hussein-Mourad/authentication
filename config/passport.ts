@@ -100,4 +100,4 @@ function passportConfig(passport) {
   });
 }
 
-module.exports = passportConfig;
+export default passportConfig;

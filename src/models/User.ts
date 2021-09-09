@@ -1,9 +1,29 @@
-const mongoose = require("mongoose");
-const { isEmail, isMobilePhone, isStrongPassword } = require("validator");
-const bcrypt = require("bcrypt");
-const isValidBio = require("../utils/isValidBio");
+import bcrypt from "bcrypt";
+import { Document, Model, model, Schema } from "mongoose";
+import isEmail from 'validator/lib/isEmail';
+import isMobilePhone from 'validator/lib/isMobilePhone';
+import isStrongPassword from "validator/lib/isStrongPassword";
+import isValidBio from "../utils/isValidBio";
 
-const userSchema = new mongoose.Schema(
+export interface IUser {
+  authId?:string;
+  name?:string;
+  bio?:string;
+  phone?:string;
+  photo?:string;
+  email:string;
+  password:string;
+  passwordLength:number;
+  isOAuthUser?:boolean;
+  showEmail?:boolean;
+  showPassword?:boolean
+}
+
+export interface UserModel extends Model<IUser>{
+  login(email:string, password:string):Promise<IUser & Document<any, any, IUser>>;
+}
+
+const userSchema = new Schema<IUser, UserModel, IUser>(
   {
     authId: String,
     name: String,
@@ -33,7 +53,7 @@ const userSchema = new mongoose.Schema(
       required: [true, "Please enter a password"],
       minLength: [8, "Minimum length is 8 characters"],
       validate: [
-        (str) => isStrongPassword(str, { minSymbols: 0 }),
+        (str:string) => isStrongPassword(str, { minSymbols: 0 }),
         "Password must contain at least one uppercase, and one number.",
       ],
     },
@@ -58,7 +78,7 @@ userSchema.pre("save", async function (next) {
 });
 
 // Method to login a user
-userSchema.statics.login = async function (email, password) {
+userSchema.statics.login = async function (email:string, password:string) {
   const user = await this.findOne({ email });
   if (user) {
     const auth = await bcrypt.compare(password, user.password);
@@ -69,6 +89,6 @@ userSchema.statics.login = async function (email, password) {
   throw Error("Incorrect email or password");
 };
 
-var User = mongoose.model("User", userSchema);
+var User = model<IUser, UserModel>("User", userSchema);
 
-module.exports = User;
+export default User;/

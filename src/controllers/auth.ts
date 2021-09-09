@@ -1,5 +1,5 @@
 const User = require("../models/User");
-const jwt = require("jsonwebtoken");
+c{onst jwt = require("jsonwebtoken");
 // const hashPassword = require("../utils/hashPassword")
 
 const handleErrors = (err) => {
@@ -33,7 +33,7 @@ const createToken = (id) => {
   });
 };
 
-module.exports.check_auth_post = (req, res, next) => {
+ check_auth_post = (req, res, next) => {
   const token = req.cookies.jwt;
   if (!token && !req.isAuthenticated()) {
     return res.status(401).json({ user: null });
@@ -68,7 +68,7 @@ module.exports.check_auth_post = (req, res, next) => {
   }
 };
 
-module.exports.signup_post = async (req, res, next) => {
+ signup_post = async (req, res, next) => {
   var { email, password } = req.body;
   // password = await hashPassword(password);
   try {
@@ -96,7 +96,7 @@ module.exports.signup_post = async (req, res, next) => {
   }
 };
 
-module.exports.login_post = async (req, res, next) => {
+ login_post = async (req, res, next) => {
   const { email, password } = req.body;
   try {
     // @ts-ignore
@@ -116,10 +116,10 @@ module.exports.login_post = async (req, res, next) => {
   }
 };
 
-module.exports.logout_post = async (req, res, next) => {
+ logout_post = async (req, res, next) => {
   res.cookie("jwt", "", { maxAge: 1 });
   req.logout();
   res.json("ok");
 };
 
-module.exports.handleErrors = handleErrors;
+ handleErrors = handleErrors;
