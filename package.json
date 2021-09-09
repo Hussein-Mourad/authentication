@@ -1,0 +1,62 @@
+{
+  "name": "auth",
+  "version": "0.0.0",
+  "private": true,
+  "engines": {
+    "node": "v14.17.0"
+  },
+  "scripts": {
+    "start": "node ./bin/www.js",
+    "build": "",
+    "dev": "cross-env NODE_ENV=development cross-env DEBUG=* ; nodemon ./bin/www"
+  },
+  "nodemonConfig": {
+    "verbose": true,
+    "ignore": [
+      "client/*",
+      "public/*"
+    ],
+    "delay": 2000,
+    "env": {
+      "NODE_ENV": "development"
+    }
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "compression": "^1.7.4",
+    "connect-mongo": "^4.4.1",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "dotenv": "^8.2.0",
+    "ejs": "~2.6.1",
+    "express": "~4.16.1",
+    "express-session": "^1.17.1",
+    "helmet": "^4.6.0",
+    "http-errors": "~1.6.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.12.3",
+    "morgan": "~1.9.1",
+    "multiparty": "^4.2.2",
+    "passport": "^0.4.1",
+    "passport-facebook": "^3.0.0",
+    "passport-github2": "^0.1.12",
+    "passport-google-oauth20": "^2.0.0",
+    "passport-twitter": "^0.1.5",
+    "validator": "^13.6.0"
+  },
+  "devDependencies": {
+    "@webpack-cli/generators": "^1.1.0",
+    "aws-sdk": "^2.955.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^7.31.0",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.0",
+    "mock-aws-s3": "^4.0.2",
+    "nock": "^13.1.1",
+    "nodemon": "^2.0.7",
+    "prettier": "^2.2.1",
+    "webpack": "^5.31.0",
+    "webpack-cli": "^4.7.2"
+  }
+}
